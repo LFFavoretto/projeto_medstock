@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
 :root{
     --cor-menu: #8F9BBF50;
     --cor--button-menu: #F2F2F2;
@@ -24,6 +29,9 @@ header{
     height: 100vh;
     flex-direction: column;
     padding: 20px;
+
+    /* deixando o "header" fixo */
+    position:fixed;
 }
 header img{
     display: block;
@@ -56,9 +64,11 @@ header .menu a{
 
 /* inicio do main */
 main {
+    margin-left: 390px; /* espaço definido para que o "main" não fique abaixo do "header" */
     flex: 1; 
     padding: 60px 30px;
     background-color: #E0E0E0;
+    min-height:84.5vh;
 }
 /* fim do main*/
 
