@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedStock - dashboard</title>
+</head>
+<body>
+
+<header>
+    <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
+    <nav class="sidebar">
+        <div class="menu">
+            <a href="#">Dashboard</a>
+            <a href="#">Unidades de saúde</a>
+            <a href="insumos.html">Insumos</a>
+            <a href="#">Movimentação</a>
+        </div>
+    </nav>
+    <div class="footer">© 2026 MedStock</div>
+</header>
+
+<main>
+    <section class="cards_estoque">
+        <article class="card_total">
+            <div class="icone">
+                <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <div class="conteudo">
+                <p>Estoque total</p>
+                <strong>12.500</strong>
+            </div>
+        </article>
+
+        <article class="card_baixo">
+            <div class="icone">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="conteudo">
+                <p>Estoque baixo</p>
+                <strong>1.000</strong>
+            </div>
+        </article>
+
+        <article class="card_vazio">
+            <div class="icone">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="conteudo">
+                <p>Sem estoque</p>
+                <strong>100</strong>
+            </div>
+        </article>
+
+    </section>
+
+    <section class="cards_medicamento">
+        <article class="box_m">
+            <p>Classe de insumo</p>
+            <strong>134</strong>
+        </article>
+
+        <article class="box_m">
+            <p>Classe de insumo</p>
+            <strong>134</strong>
+        </article>
+
+        <article class="box_m">
+            <p>Classe de insumo</p>
+            <strong>134</strong>
+        </article>
+
+        <article class="box_m">
+            <p>Classe de insumo</p>
+            <strong>134</strong>
+        </article>
+    </section>
+
+    <section class="t_container">
+
+        <div class="top_bar">
+            <div class="pesquisa_insumo">
+                <input type="text" placeholder="Consultar insumo">
+            </div>
+            <button>Filtro</button>
+        </div>
+
+        <table>
+            <thead class="t_head">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Fornecedor</th>
+                    <th>Lote</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>002</td>
+                    <td>paracetamol</td>
+                    <td>150</td>
+                    <td>fornecedor x</td>
+                    <td>L456</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </section>
+</main>
+    <!-- <footer>
+        <p>© 2026 MedStock</p>
+    </footer> -->
+</body>
+</html>

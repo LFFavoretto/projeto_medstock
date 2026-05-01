@@ -1,0 +1,35 @@
+# =========================
+# 🔒 Variáveis de ambiente
+# =========================
+.env
+backend/.env
+
+# =========================
+# 📦 Dependências Node
+# =========================
+node_modules/
+backend/node_modules/
+
+# =========================
+# ⚙️ Configuração do VS Code
+# =========================
+.vscode/
+
+# =========================
+# 🧾 Logs
+# =========================
+*.log
+npm-debug.log*
+
+# =========================
+# 🖥️ Arquivos do sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# 📁 Builds / temporários
+# =========================
+dist/
+build/
+.tmp/

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/insumos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedStock - insumos</title>
+</head>
+<body>
+    <header>
+        <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
+        <nav class="sidebar">
+            <div class="menu">
+                <a href="index.html">Dashboard</a>
+                <a href="#">Unidades de saúde</a>
+                <a href="#">Insumos</a>
+                <a href="#">Movimentação</a>
+            </div>
+        </nav>
+        <div class="footer">© 2026 MedStock</div>
+    </header>
+    <main>
+        <section class="cards">
+            <article id="box_unidades" class="box">
+                    <strong>134</strong>
+                    <p>unidades cadastradas</p>
+            </article>
+
+            <article id="box_pedido" class="box">
+                    <strong>134</strong>
+                    <p>Pedidos Necessários</p>
+            </article>
+            
+            <article id="box_produto" class="box">
+                    <strong>134</strong>
+                    <p>Produtos cadastrados</p>
+            </article>
+            
+            <article id="box_Fornecedores" class="box">
+                    <strong>134</strong>
+                    <p>Fornecedores</p>
+                    <img src="" alt="">
+            </article>
+        </section>
+        
+        <section id="grafico_container">
+            <div class="grafico_header">
+                <p>Entrada e saída de insumos no mês</p>
+                <select id="mes">
+                    <option value="1">Mês 1</option>
+                    <option value="2">Mês 2</option>
+                </select>
+            </div>
+            <canvas id="graficoInsumos"></canvas>
+        </section>
+
+        <section id="tabela_estoque">
+
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

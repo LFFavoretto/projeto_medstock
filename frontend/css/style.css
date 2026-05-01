@@ -1,0 +1,79 @@
+:root{
+    --cor-menu: #8F9BBF50;
+    --cor--button-menu: #F2F2F2;
+    --cor--card-classe: #F2F2F2;
+    --preto: #000000;
+    --borda--geral: #00000030;
+    --fundo--tabela: #FFFFFF;
+    --cor--busca: #F6F8FF;
+}
+body{
+    margin: 0;
+    display: flex;
+}
+input {
+    background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 10px center;
+    background-size: 16px;
+    padding-left: 35px;
+}
+/* inicio menu lateral */
+header{
+    background-color:var(--cor-menu);
+    display: flex;
+    width: 350px;
+    height: 100vh;
+    flex-direction: column;
+    padding: 20px;
+}
+header img{
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
+    max-height: 320px;
+}
+header .sidebar{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+header .menu{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+header .menu a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid transparent; 
+    text-decoration: none;
+    color: var(--preto);
+}
+/* fim menu lateral */
+
+/* inicio do main */
+main {
+    flex: 1; 
+    padding: 60px 30px;
+    background-color: #E0E0E0;
+}
+/* fim do main*/
+
+/*footer*/
+.footer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+/*footer*/
+
+/* efeitos */
+header .menu a:hover{
+    background-color: var(--cor--button-menu);
+    border: 1px solid var(--preto);
+    transition: 0.2s;
+}
+/* efeitos */
