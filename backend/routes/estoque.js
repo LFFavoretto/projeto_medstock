@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const {Insumo, Medicamento, Movimentacao} = require('models.js');
 
 // ================= GET /estoque =================
 router.get('/', async (req, res) => {
