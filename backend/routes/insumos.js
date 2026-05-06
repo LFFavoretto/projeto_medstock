@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const {insumo} = required('models.js')
+const Insumo = require('../models/insumo')
 
 
 // ================= GET =================
@@ -11,8 +11,10 @@ router.get('/', async (req, res) => {
         // ================= ACESSO AO BANCO =================
         // Busca todos os insumos cadastrados
         const[rows] = await db.query('SELECT * FROM insumos');
+
         res.json(rows);
     }
+
     catch (erro) {
         res.status(500).send(erro)
     }
@@ -30,6 +32,16 @@ router.post('/', async (req, res) => {
         if (!nome || !marca) {
             return res.status(400).send('Dados obrigatórios');
         }
+
+        // ================= MODEL =================
+        // Cria objeto usando classe Insumo
+        const insumo = new Insumo(
+            null,
+            nome,
+            0,
+            marca
+        );
+        console.log(insumo);
 
         // ================= BANCO =================
         // Insere novo insumo no banco

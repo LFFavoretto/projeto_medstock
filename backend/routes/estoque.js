@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const {Insumo, Medicamento, Movimentacao} = require('models.js');
+const Produto = require('../models/produto');
+const Movimentacao = require('../models/movimentacao')
 
 // ================= GET /estoque =================
 router.get('/', async (req, res) => {
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
             `);
 
             res.json(rows);
+
     } catch (erro){
         res.status(500).send(erro);
     }
@@ -42,13 +44,25 @@ router.post('/', async(req, res) => {
             return res.status(400).send('Tipo de movimentação inválida');
         }
 
+        // Valida quantidade
         if (!quantidade || quantidade <= 0){
             return res.status(400).send('Quantidade inválida');
         }
 
+        // Valida campos obrigatórios
         if (!id_unidade_saude || !id_insumos || !id_usuarios){
             return res.status(400).send('Dados obrigatórios não informados.');
         }
+
+        // ================= BANCO =================
+        // Busca nome do insumo
+        const [produtosRows] = await db.query('SELECT nome FROM insumos Where id = ?', [id_insumos]);
+
+        if (produtosRows.length === 0) {
+            return res.status(404).send('Insumo não encontrado');
+        }
+
+        const nomeProduto = produtoRows[0].nome;
 
         // ================= REGRA DE NEGÓCIO =================
         // Calcula o saldo atual do estoque
@@ -67,12 +81,40 @@ router.post('/', async(req, res) => {
         const saldoAtual = Number(saldoResult[0].saldo) || 0;;
 
         
-        // ================= REGRA IMPORTANTE =================
-        // Não permitir saída maior que o estoque
-        if (tipo_movimentacao ==='saida' && quantidade > saldoAtual){
-            return res.status(400).send('Estoque insuficiente nesta unidade')
+        // ================= MODEL =================
+        // Cria objeto Produto usando classe do models.js
+        const produto = new Produto(
+            id_insumos,
+            nomeProduto,
+            saldoAtual
+        );
+
+        // ================= MODEL =================
+        // Usa métodos da classe para aplicar regra de estoque
+        try {
+
+            if (tipo_movimentacao === 'saida') {
+                produto.remover_quantidade(quantidade);
+            } else {
+                produto.add_quantidade(quantidade);
+            }
+
+        } catch (erroModel) {
+            return res.status(400).send(erroModel.message);
         }
 
+        // ================= MODEL =================
+        // Cria objeto de movimentação
+        const movimentacao = new Movimentacao(
+            produto,
+            quantidade,
+            tipo_movimentacao,
+            id_usuarios,
+            id_unidade_saude
+        );
+
+        // Exibe movimentação no terminal
+        console.log(movimentacao.registrar());
 
         // ================= BANCO =================
         // Insere movimentação (histórico)
