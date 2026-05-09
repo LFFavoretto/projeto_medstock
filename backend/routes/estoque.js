@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
     try {
         // ================= ACESSO AO BANCO =================
         // Query que junta várias tabelas (JOIN)
-        const [rows] = await db.query(`SELECT e.id, i.nome AS insumo, u.nome AS usuario, us.nome AS unidade, e.tipo_movimentacao, e.quantidade, e.data_movimentacao
+        const [rows] = await db.query(`SELECT e.id, p.nome AS produto, u.nome AS usuario, us.nome AS unidade, e.tipo_movimentacao, e.quantidade, e.data_movimentacao
             FROM estoque e
-            JOIN insumos i ON e.id_insumos = i.id
+            JOIN produtos i ON e.id_produtos = p.id
             JOIN usuarios u ON e.id_usuarios = u.id
             JOIN unidade_saude us ON e.id_unidade_saude = us.id
             `);
@@ -29,7 +29,7 @@ router.post('/', async(req, res) => {
     try {
         const {
             id_unidade_saude,
-            id_insumos,
+            id_produtos,
             id_usuarios,
             tipo_movimentacao,
             quantidade,
@@ -56,13 +56,13 @@ router.post('/', async(req, res) => {
 
         // ================= BANCO =================
         // Busca nome do insumo
-        const [produtosRows] = await db.query('SELECT nome FROM insumos Where id = ?', [id_insumos]);
+        const [produtosRows] = await db.query('SELECT nome FROM produtos Where id = ?', [id_produtos]);
 
         if (produtosRows.length === 0) {
-            return res.status(404).send('Insumo não encontrado');
+            return res.status(404).send('Produto não encontrado');
         }
 
-        const nomeProduto = produtoRows[0].nome;
+        const nomeProduto = produtosRows[0].nome;
 
         // ================= REGRA DE NEGÓCIO =================
         // Calcula o saldo atual do estoque
@@ -75,8 +75,8 @@ router.post('/', async(req, res) => {
                     END                    
                 ) AS saldo
             FROM estoque
-            WHERE id_insumos = ? AND id_unidade_saude = ?
-            `, [id_insumos, id_unidade_saude]);
+            WHERE id_produtos = ? AND id_unidade_saude = ?
+            `, [id_produtos, id_unidade_saude]);
         
         const saldoAtual = Number(saldoResult[0].saldo) || 0;;
 
@@ -84,7 +84,7 @@ router.post('/', async(req, res) => {
         // ================= MODEL =================
         // Cria objeto Produto usando classe do models.js
         const produto = new Produto(
-            id_insumos,
+            id_produtos,
             nomeProduto,
             saldoAtual
         );
@@ -118,11 +118,11 @@ router.post('/', async(req, res) => {
 
         // ================= BANCO =================
         // Insere movimentação (histórico)
-        await db.query(`INSERT INTO estoque (id_unidade_saude, id_insumos,id_usuarios, tipo_movimentacao, quantidade, lote, data_validade, observacoes)
+        await db.query(`INSERT INTO estoque (id_unidade_saude, id_produtos,id_usuarios, tipo_movimentacao, quantidade, lote, data_validade, observacoes)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         [
             id_unidade_saude,
-            id_insumos,
+            id_produtos,
             id_usuarios,
             tipo_movimentacao,
             quantidade,

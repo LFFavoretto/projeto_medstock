@@ -1,4 +1,4 @@
--- Criação de tabelas 
+-- Criação de tabelas
 CREATE TABLE unidade_saude (
 id INT AUTO_INCREMENT PRIMARY KEY,
 nome VARCHAR(150) NOT NULL,
@@ -40,3 +40,22 @@ FOREIGN KEY(id_usuarios) REFERENCES usuarios(id)
 
 -- Atualização da tabela usuarios
 ALTER TABLE usuarios ADD ativo BOOLEAN DEFAULT TRUE;
+
+-- Renomeando a tabela insumos para produtos
+RENAME TABLE insumos TO produtos;
+
+-- Atualização da chave estrangeira na tabela estoque
+ALTER TABLE estoque
+CHANGE id_insumos id_produtos INT NOT NULL;
+
+-- Atualição das informações na tabela produtos
+ALTER TABLE produtos
+ADD tipo ENUM('insumo', 'medicamento') NOT NULL,
+ADD fornecedor VARCHAR(100),
+ADD dosagem VARCHAR(50),
+ADD controlado BOOLEAN DEFAULT FALSE,
+ADD setor VARCHAR(100),
+ADD ativo BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE produtos
+ADD categoria_insumo VARCHAR(100);

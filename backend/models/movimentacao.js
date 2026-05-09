@@ -1,11 +1,18 @@
 class Movimentacao {
     constructor(produto, quantidade, tipo, responsavel, unidade) {
+        this.validarTipo(tipo); 
         this.produto = produto; // Instância de Produto/Insumo/Medicamento
         this.quantidade = quantidade;
         this.tipo = tipo; // "entrada" ou "saida"
         this.responsavel = responsavel;
         this.unidade = unidade;
         this.data = new Date();
+    }
+
+    validarTipo() {        
+        if (!['entrada', 'saida'].includes(tipo)) {
+            throw new Error('Tipo inválido');
+        }
     }
 
     registrar() {
