@@ -1,0 +1,75 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-image:url('../img/background_login.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    font-family:Arial, sans-serif;
+}
+
+.login{
+    width:500px;
+    height:500px;
+    background:rgba(255,255,255,0.8);
+    border:3px solid #0E2773;
+    border-radius:20px;
+    backdrop-filter:blur(3px);
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.logo{
+    width:150px;
+    margin-bottom:20px;
+}
+
+hr{
+    width:100%;
+    border:1px solid #0E2773;
+    margin-bottom:30px;
+}
+
+.grupo-input{
+    width:300px;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.grupo-input label{
+    font-size:18px;
+    color:#0E2773;
+    margin-bottom:5px;
+}
+
+.grupo-input input{
+    height:30px;
+    background:rgba(66,85,140,0.3);
+    border:2px solid #0E2773;
+    border-radius:20px;
+    padding:0 15px;
+    outline:none;
+}
+
+.botao{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    background-color: #0E2773;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin: 5px;
+}
