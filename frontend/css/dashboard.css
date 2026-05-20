@@ -7,6 +7,12 @@
     --fundo--tabela: #FFFFFF;
     --cor--busca: #F6F8FF;
 }
+
+.menu i{
+    margin-right: 5px;
+    font-size: 13px;
+    color:#673c2eb0;
+}
 .cards_estoque{
     display: flex;
     justify-content: space-between;
@@ -135,7 +141,13 @@
     color: #5405ff;
 }
 
-table{
+.container_tabela{
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.tabela{
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -153,7 +165,23 @@ th, td{
 th{
     font-weight: 600;
 }
-tr:hover{
-    background-color: #f5f5f5;
+
+.acoes{
+    text-align: center;
+    cursor: pointer;
+    width: 20px;
+    padding: 0;
 }
+
+.acoes i{
+    padding: 5px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.acoes i:hover{
+    background-color: #dcdcdc;
+}
+
+
 

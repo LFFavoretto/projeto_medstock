@@ -14,10 +14,10 @@
     <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
     <nav class="sidebar">
         <div class="menu">            
-            <a href="#">Dashboard</a>
-            <a href="#">Unidades de saúde</a>
-            <a href="insumos.html">Insumos</a>
-            <a href="#">Movimentação</a>
+            <a href="#"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+            <a href="#"><i class="fa-solid fa-house-medical"></i>Unidades de saúde</a>
+            <a href="insumos.html"><i class="fa-solid fa-boxes-stacked"></i>Produtos</a>
+            <a href="#"><i class="fa-solid fa-cart-flatbed"></i>Movimentação</a>
         </div>
     </nav>
     <div class="footer">© 2026 MedStock</div>
@@ -88,26 +88,31 @@
             <button>Filtro</button>
         </div>
 
-        <table>
-            <thead class="t_head">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Quantidade</th>
-                    <th>Fornecedor</th>
-                    <th>Lote</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>002</td>
-                    <td>paracetamol</td>
-                    <td>150</td>
-                    <td>fornecedor x</td>
-                    <td>L456</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container_tabela">        
+            <table class="tabela">
+                <thead class="t_head">
+                    <tr>
+                        <th>Produto</th>
+                        <th>Tipo</th>   
+                        <th>Quantidade</th>
+                        <th>Situação</th>
+                        <th>Lote</th>
+                        <th>Fornecedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paracetamol</td>
+                        <td>Medicamento</td>
+                        <td>150</td>
+                        <td>Operacional</td>
+                        <td>L456</td>
+                        <td>MedCar</td>
+                        <td class="acoes"> <i class="fa-solid fa-ellipsis-vertical"></i> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         
     </section>
 </main>

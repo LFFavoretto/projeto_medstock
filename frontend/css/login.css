@@ -40,20 +40,20 @@ hr{
     margin-bottom:30px;
 }
 
-.grupo-input{
+.grupo_input{
     width:300px;
     display:flex;
     flex-direction:column;
     margin-bottom:20px;
 }
 
-.grupo-input label{
+.grupo_input label{
     font-size:18px;
     color:#0E2773;
     margin-bottom:5px;
 }
 
-.grupo-input input{
+.grupo_input input{
     height:30px;
     background:rgba(66,85,140,0.3);
     border:2px solid #0E2773;
