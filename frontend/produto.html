@@ -24,6 +24,8 @@
 </aside>
 
 <main>
+    <button class="botao_cadastro">+NOVO PRODUTO</button>
+
     <section class="cards_estoque">
         <article class="card_total">
             <div class="icone">
@@ -100,24 +102,43 @@
                         <th>Fornecedor</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Paracetamol</td>
-                        <td>Medicamento</td>
-                        <td>150</td>
-                        <td>Operacional</td>
-                        <td>L456</td>
-                        <td>MedCar</td>
-                        <td class="acoes"> <i class="fa-solid fa-ellipsis-vertical"></i> </td>
-                    </tr>
+                <tbody id="lista-produtos">
                 </tbody>
             </table>
         </div>
         
     </section>
 </main>
-    <!-- <footer>
-        <p>© 2026 MedStock</p>
-    </footer> -->
+<!-- MODAL -->
+<div id="modalProduto" class="modal">
+    <div class="modal-conteudo">
+        <h2>Novo Produto</h2>
+        <form id="formProduto">
+            <input
+                type="text"
+                id="nome"
+                placeholder="Nome"
+                required
+            >
+            <select id="tipo">
+                <option value="insumo">
+                    Insumo
+                </option>
+                <option value="medicamento">
+                    Medicamento
+                </option>
+            </select>
+            <input
+                type="text"
+                id="marca"
+                placeholder="Marca"
+            >
+            <button type="submit">
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>
+<script src="./js/produtos.js"></script>
 </body>
 </html>
