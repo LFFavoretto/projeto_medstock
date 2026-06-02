@@ -14,7 +14,7 @@ async function listarProdutos() {
             );
 
         tbody.innerHTML = '';
-
+        
         produtos.forEach(produto => {
 
             tbody.innerHTML += `
