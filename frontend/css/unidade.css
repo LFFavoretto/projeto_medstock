@@ -1,0 +1,416 @@
+/* ===== CONTAINER PRINCIPAL ===== */
+.container-principal {
+  margin-left: 250px;
+  padding: 30px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.topbar h1 {
+  font-size: 28px;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+}
+
+.btn-nova-unidade {
+  background-color: #8bc34a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-nova-unidade:hover {
+  background-color: #7cb342;
+}
+
+/* ===== SEÇÃO UNIDADES ===== */
+.secao-unidades {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== FILTROS ===== */
+.filtros {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.input-filtro {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  flex: 1;
+  max-width: 300px;
+}
+
+.input-filtro:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+/* ===== TABELA ===== */
+.tabela-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.tabela-unidades {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabela-unidades thead {
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabela-unidades th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabela-unidades tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.tabela-unidades tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.tabela-unidades td {
+  padding: 15px;
+  color: #555;
+}
+
+/* ===== AÇÕES ===== */
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-acao {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-acao.editar {
+  color: #2196f3;
+}
+
+.btn-acao.editar:hover {
+  background-color: #e3f2fd;
+}
+
+.btn-acao.deletar {
+  color: #f44336;
+}
+
+.btn-acao.deletar:hover {
+  background-color: #ffebee;
+}
+
+/* ===== ESTADO VAZIO ===== */
+.linha-carregamento td,
+.linha-vazia td {
+  text-align: center;
+  padding: 40px 15px;
+  color: #999;
+}
+
+.texto-carregamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ===== PAGINAÇÃO ===== */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.btn-pagina {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn-pagina:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-pagina.ativo {
+  background-color: #2196f3;
+  color: white;
+  border-color: #2196f3;
+}
+
+/* ===== MODAL ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal.ativo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-conteudo {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.btn-fechar {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-fechar:hover {
+  color: #333;
+}
+
+/* ===== FORMULÁRIO ===== */
+.form-unidade {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.grupo-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.grupo-form-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.grupo-form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.grupo-form input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.grupo-form input:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+/* ===== BOTÕES MODAL ===== */
+.botoes-modal {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+  justify-content: flex-end;
+}
+
+.btn-cancelar,
+.btn-salvar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-cancelar {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-cancelar:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-salvar {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #1976d2;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .container-principal {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .topbar h1 {
+    font-size: 22px;
+  }
+
+  .btn-nova-unidade {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filtros {
+    flex-direction: column;
+  }
+
+  .input-filtro {
+    max-width: 100%;
+  }
+
+  .tabela-unidades {
+    font-size: 12px;
+  }
+
+  .tabela-unidades th,
+  .tabela-unidades td {
+    padding: 10px;
+  }
+
+  .modal-conteudo {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+
+  .grupo-form-dupla {
+    grid-template-columns: 1fr;
+  }
+}

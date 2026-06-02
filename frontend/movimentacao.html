@@ -6,20 +6,127 @@
     <link rel="stylesheet" href="css/movimentacao.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedStock - dashboard</title>
+    <title>MedStock - Movimentação</title>
 </head>
 <body>
-    <aside>
+    <aside class="sidebar-container">
         <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
         <nav class="sidebar">
             <div class="menu">            
                 <a href="dashboard.html"><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a>
                 <a href="unidade.html"><i class="fa-solid fa-house-medical"></i><span>Unidades de saúde</span></a>
                 <a href="produto.html"><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a>
-                <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
+                <a href="movimentacao.html"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
             </div>
         </nav>
         <div class="footer">© 2026 MedStock</div>
     </aside>
+
+    <main class="container-principal">
+        <div class="topbar">
+            <h1>Movimentações</h1>
+            <button class="btn-nova-movimentacao" onclick="abrirModalNovaMovimentacao()">
+                <i class="fa-solid fa-plus"></i> Nova Movimentação
+            </button>
+        </div>
+
+        <section class="secao-movimentacoes">
+            <div class="filtros">
+                <input type="text" id="filtroTabela" placeholder="  Buscar..." class="input-filtro">
+                <select id="filtroTipo" class="select-filtro">
+                    <option value="">Todos os tipos</option>
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+
+            <div class="tabela-container">
+                <table class="tabela-movimentacoes" id="tabelaMovimentacoes">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Lote</th>
+                            <th>Quantidade</th>
+                            <th>Movimento</th>
+                            <th>Unidade</th>
+                            <th>Responsável</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabela">
+                        <tr class="linha-carregamento">
+                            <td colspan="8" class="texto-carregamento">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Carregando movimentações...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="paginacao" id="paginacao"></div>
+        </section>
+    </main>
+
+    <!-- MODAL NOVA MOVIMENTAÇÃO -->
+    <div id="modalNovaMovimentacao" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Nova Movimentação</h2>
+                <button class="btn-fechar" onclick="fecharModalNovaMovimentacao()">&times;</button>
+            </div>
+            <form id="formMovimentacao" class="form-movimentacao">
+                <div class="grupo-form">
+                    <label for="selectProduto">Produto *</label>
+                    <select id="selectProduto" required>
+                        <option value="">Selecione um produto</option>
+                    </select>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="selectUnidade">Unidade de Saúde *</label>
+                    <select id="selectUnidade" required>
+                        <option value="">Selecione uma unidade</option>
+                    </select>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="tipoMovimentacao">Tipo de Movimentação *</label>
+                    <select id="tipoMovimentacao" required>
+                        <option value="">Selecione</option>
+                        <option value="entrada">Entrada</option>
+                        <option value="saida">Saída</option>
+                    </select>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="quantidade">Quantidade *</label>
+                    <input type="number" id="quantidade" min="1" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="lote">Lote</label>
+                    <input type="text" id="lote">
+                </div>
+
+                <div class="grupo-form">
+                    <label for="dataValidade">Data de Validade</label>
+                    <input type="date" id="dataValidade">
+                </div>
+
+                <div class="grupo-form">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" rows="3"></textarea>
+                </div>
+
+                <div class="botoes-modal">
+                    <button type="button" class="btn-cancelar" onclick="fecharModalNovaMovimentacao()">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar Movimentação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

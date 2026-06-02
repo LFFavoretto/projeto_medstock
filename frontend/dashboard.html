@@ -1,66 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedStock - insumos</title>
-</head>
-<body>
-    <aside>
-        <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
-        <nav class="sidebar">
-            <div class="menu">
-                <a href="#"><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a>
-            <a href="unidade.html"><i class="fa-solid fa-house-medical"></i><span>Unidades de saúde</span></a>
-            <a href="produto.html"><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a>
-            <a href="movimentacao.html"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
-            </div>
-        </nav>
-        <div class="footer">© 2026 MedStock</div>
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedStock - Dashboard</title>
+  </head>
+  <body>
+    <aside class="sidebar-container">
+      <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu" />
+      <nav class="sidebar">
+        <div class="menu">
+          <a href="dashboard.html" class="ativo"
+            ><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a
+          >
+          <a href="unidade.html"
+            ><i class="fa-solid fa-house-medical"></i
+            ><span>Unidades de saúde</span></a
+          >
+          <a href="produto.html"
+            ><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a
+          >
+          <a href="movimentacao.html"
+            ><i class="fa-solid fa-arrow-right-arrow-left"></i
+            ><span>Movimentação</span></a
+          >
+        </div>
+      </nav>
+      <div class="footer">© 2026 MedStock</div>
     </aside>
-    <main>
-        <section class="cards">
-            <article id="box_unidades" class="box">
-                    <strong>134</strong>
-                    <p>unidades cadastradas</p>
-            </article>
 
-            <article id="box_pedido" class="box">
-                    <strong>134</strong>
-                    <p>Pedidos Necessários</p>
-            </article>
-            
-            <article id="box_produto" class="box">
-                    <strong>134</strong>
-                    <p>Produtos cadastrados</p>
-            </article>
-            
-            <article id="box_Fornecedores" class="box">
-                    <strong>134</strong>
-                    <p>Fornecedores</p>
-                    <img src="" alt="">
-            </article>
-        </section>
-        
-        <section id="grafico_container">
-            <div class="grafico_header">
-                <p>Entrada e saída de insumos no mês</p>
-                <select id="mes">
-                    <option value="1">Mês 1</option>
-                    <option value="2">Mês 2</option>
-                </select>
+    <main class="dashboard-main">
+      <section class="cards">
+        <article id="box_unidades" class="box">
+          <div class="card-top-row">
+            <div class="card-icon">
+              <i class="fa-solid fa-hospital"></i>
             </div>
-            <canvas id="graficoInsumos"></canvas>
-        </section>
+            <strong id="statUnidades">50</strong>
+          </div>
+          <p>Unidades cadastradas</p>
+        </article>
 
-        <section id="tabela_estoque">
+        <article id="box_pedido" class="box">
+          <div class="card-top-row">
+            <div class="card-icon">
+              <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+            <strong id="statPedidos">20</strong>
+          </div>
+          <p>Pedidos necessários</p>
+        </article>
 
-        </section>
+        <article id="box_produto" class="box">
+          <div class="card-top-row">
+            <div class="card-icon">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <strong id="statProdutos">100</strong>
+          </div>
+          <p>Produtos cadastrados</p>
+        </article>
+
+        <article id="box_Fornecedores" class="box">
+          <div class="card-top-row">
+            <div class="card-icon">
+              <i class="fa-solid fa-truck-field"></i>
+            </div>
+            <strong id="statFornecedores">100</strong>
+          </div>
+          <p>Fornecedores</p>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article id="grafico_container" class="painel-grafico">
+          <div class="grafico_header">
+            <p>Entrada e saída de insumos no mês</p>
+            <select id="mes">
+              <option value="1">Mês 1</option>
+              <option value="2">Mês 2</option>
+            </select>
+          </div>
+          <canvas id="graficoInsumos"></canvas>
+        </article>
+
+        <article class="painel-baixo-estoque">
+          <div class="painel-header">
+            <p>Unidades com estoque baixo</p>
+          </div>
+          <ul id="listaBaixoEstoque" class="lista-baixo-estoque">
+            <li>Unidade Centro</li>
+            <li>Posto São José</li>
+            <li>UBS Nova Esperança</li>
+            <li>Clínica Santa Maria</li>
+            <li>Unidade Jardim</li>
+          </ul>
+        </article>
+      </section>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-</body>
+    <script src="./js/dashboard.js"></script>
+  </body>
 </html>
