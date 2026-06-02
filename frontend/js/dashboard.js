@@ -3,15 +3,6 @@ console.log("JS carregado");
 // pega o canvas
 const ctx = document.getElementById("graficoInsumos");
 
-function getChartColors() {
-  const styles = getComputedStyle(document.documentElement);
-  const entrada = styles.getPropertyValue("--chart-entrada") || "#8bc34a";
-  const saida = styles.getPropertyValue("--chart-saida") || "#f4511e";
-  return { entrada: entrada.trim(), saida: saida.trim() };
-}
-
-const cores = getChartColors();
-
 // cria o gráfico
 let grafico = new Chart(ctx, {
   type: "bar",
@@ -21,12 +12,12 @@ let grafico = new Chart(ctx, {
       {
         label: "Entrada",
         data: [],
-        backgroundColor: cores.entrada,
+        backgroundColor: "#8bc34a",
       },
       {
         label: "Saída",
         data: [],
-        backgroundColor: cores.saida,
+        backgroundColor: "#f4511e",
       },
     ],
   },
@@ -40,10 +31,10 @@ let grafico = new Chart(ctx, {
   },
 });
 
-// função para carregar dados do backend
+// função para carregar dados
 async function carregarDados(mes) {
   try {
-    const resposta = await fetch(`/dados`);
+    const resposta = await fetch("../dados.json");
     const dados = await resposta.json();
 
     const dadosMes = dados[mes];
