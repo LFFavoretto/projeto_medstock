@@ -44,6 +44,27 @@ function verificarAdmin(req, res, next) {
     next();
 }
 
+router.get('/', autenticarToken, verificarAdmin, async (req, res) => {
+    try {
+        const [rows] = await db.query(`
+            SELECT
+                u.id,
+                u.nome,
+                u.email,
+                u.tipo_usuario,
+                u.ativo,
+                us.nome AS unidade
+            FROM usuarios u
+            JOIN unidade_saude us
+                ON u.id_unidade_saude = us.id
+            ORDER BY u.nome
+        `);
+        res.json(rows);
+    } catch (erro) {
+        res.status(500).send(erro);
+    }
+});
+
 // ================= GET /usuarios/:id =================
 router.get('/:id', autenticarToken, verificarAdmin, async (req, res) => {
     try {
@@ -239,7 +260,10 @@ router.post('/login', async (req, res) => {
             {expiresIn: '1h'}
         );
 
-        res.json({ token })
+        res.json({ token,
+            tipo: usuario.tipo_usuario,
+            nome: usuario.next
+        })
 
     } catch (erro) {
         res.status(500).send(erro)

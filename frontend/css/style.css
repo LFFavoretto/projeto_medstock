@@ -17,7 +17,10 @@ body{
     margin: 0;
     display: flex;
 }
-input {
+.pesquisa_insumo input,
+.pesquisa_usuario input,
+.pesquisa_unidade input,
+.pesquisa_movimentacao input{
     background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 10px center;
     background-size: 16px;
     padding-left: 35px;

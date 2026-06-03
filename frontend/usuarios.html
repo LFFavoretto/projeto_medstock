@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/usuarios.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedStock - Dashboard</title>
+</head>
+<body>
+    <aside class="sidebar-container">
+        <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu" />
+        <nav class="sidebar">
+            <div class="menu">
+                <a href="dashboard.html" class="ativo"><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a>
+                <a href="unidade.html"><i class="fa-solid fa-house-medical"></i><span>Unidades de saúde</span></a>
+                <a href="produto.html"><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a>
+                <a href="movimentacao.html"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
+                <a href="usuarios.html"><i class="fa-solid fa-user"></i><span>Usuários</span></a>
+            </div>
+        </nav>
+        <div class="footer">© 2026 MedStock</div>
+    </aside>
+
+    <main>
+    <button class="btn-novo-usuario" onclick="abrirModalNovoUsuario()">
+        + NOVO USUÁRIO
+    </button>
+    <section class="cards_usuarios">
+        <article class="card_usuario">
+            <div class="icone">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="conteudo">
+                <p>Total de usuários</p>
+                <strong>25</strong>
+            </div>
+        </article>
+
+        <article class="card_usuario">
+            <div class="icone">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="conteudo">
+                <p>Administradores</p>
+                <strong>3</strong>
+            </div>
+        </article>
+
+        <article class="card_usuario">
+            <div class="icone">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="conteudo">
+                <p>Operadores</p>
+                <strong>22</strong>
+            </div>
+        </article>
+    </section>
+
+    <section class="t_container">
+        <div class="top_bar">
+            <div class="pesquisa_usuario">
+                <input type="text" placeholder="Pesquisar usuário">
+            </div>
+            <button>
+                Filtro
+            </button>
+
+        </div>
+        <div class="container_tabela">
+            <table class="tabela">
+                <thead class="t_head">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Tipo</th>
+                        <th>Unidade</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="lista-usuarios">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<!-- MODAL NOVO USUÁRIO -->
+<div id="modalUsuario" class="modal">
+    <div class="modal-conteudo">
+        <div class="modal-header">
+            <h2 id="tituloModal">Novo Usuário</h2>
+            <button class="btn-fechar"onclick="fecharModalNovoUsuario()">
+                &times;
+            </button>
+        </div>
+        <form id="formUsuario" class="form-unidade">
+            <div class="grupo-form">
+                <label for="nome"> Nome Completo * </label>
+                <input type="text" id="nome" required placeholder="Nome completo"/>
+            </div>
+            <div class="grupo-form">
+                <label for="email"> E-mail * </label>
+                <input type="email" id="email" required placeholder="Email"/>
+            </div>
+
+            <div class="grupo-form">
+                <label for="senha"> Senha * </label>
+                <input type="password" id="senha" required placeholder="Digite a senha"/>
+            </div>
+
+            <div class="grupo-form-dupla">
+                <div class="grupo-form">
+                    <label for="tipo_usuario"> Tipo de Usuário * </label>
+                    <select id="tipo_usuario" required>
+                        <option value=""> Selecione </option>
+                        <option value="operador"> Operador </option>
+                        <option value="administrador"> Administrador </option>
+                    </select>
+                </div>
+
+                <div class="grupo-form">
+                    <label for="id_unidade_saude"> Unidade de Saúde *</label>
+
+                    <select id="id_unidade_saude" required>
+                        <option value=""> Selecione uma unidade </option>
+                    </select>
+                </div>
+            </div>
+            <div class="botoes-modal">
+                <button type="button" class="btn-cancelar" onclick="fecharModalNovoUsuario()"> Cancelar </button>
+
+                <button type="submit" class="btn-salvar"> Salvar Usuário </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="./js/usuarios.js"></script>
+</body>
+</html>
