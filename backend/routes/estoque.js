@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     const [rows] =
       await db.query(`SELECT e.id, p.nome AS produto, u.nome AS usuario, us.nome AS unidade, e.tipo_movimentacao, e.quantidade, e.data_movimentacao
             FROM estoque e
-            JOIN produtos i ON e.id_produtos = p.id
+            JOIN produtos p ON e.id_produtos = p.id
             JOIN usuarios u ON e.id_usuarios = u.id
             JOIN unidade_saude us ON e.id_unidade_saude = us.id
             `);

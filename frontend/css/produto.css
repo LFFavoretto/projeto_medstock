@@ -55,7 +55,8 @@ main {
 
 .cards_estoque{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 125px;
     
 }
 .cards_estoque article{
