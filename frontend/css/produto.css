@@ -1,31 +1,36 @@
-:root{  
-    --cor--button-menu: #F2F2F2;
-    --cor--card-classe: #F2F2F2;
+:root {
+    --cor--button-menu: #f2f2f2;
+    --cor--card-classe: #f2f2f2;
     --preto: #000000;
     --borda--geral: #00000030;
-    --fundo--tabela: #FFFFFF;
-    --cor--busca: #F6F8FF;
-}
-main .btn-novo {
-    margin-top: 20  px;
-    gap: 10px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    --fundo--tabela: #ffffff;
+    --cor--busca: #f6f8ff;
 }
 
-main {
-    margin-left: 250px;
-    padding: 30px;
-    min-height: 100vh;
-    background-color: #F5F7FB;
+.topbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.topbar h1{
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
 
 .btn-novo {
-    height: 35px;
-    padding: 0 30px;
-    color: var(--preto);   
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 6px;
     border: none;
     background-color: #8bc34a;
     color: white;
@@ -33,7 +38,11 @@ main {
     font-weight: 600;
     border: 1px solid var(--borda--geral);
     cursor: pointer;
-    transition: 0.1;
+    transition: background-color 0.3s ease;
+}
+
+.btn-novo:hover {
+    background-color: #7cb342;
 }
 
 .sidebar-container {
@@ -48,86 +57,76 @@ main {
     padding-top: 30px;
 }
 
-
-.btn-novo:hover{
-    background-color: #7cb342;
-}
-
-.cards_estoque{
+.cards_estoque {
     display: flex;
-    justify-content: center;
-    gap: 125px;
-    
+    justify-content: space-between;
 }
-.cards_estoque article{
+.cards_estoque article {
     display: flex;
     align-items: center;
-    gap: 15px;
-
+    gap: 15px;    
     width: 250px;
     height: 102px;
     border: 1px solid var(--borda--geral);
     border-radius: 10px;
 }
 
-.icone{
+.icone {
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 50px;
     height: 50px;
-    margin:15px;
+    margin: 15px;
     border-radius: 50%;
     border: 1px solid var(--borda--geral);
 }
-.icone i{
-    font-size: 24px
+.icone i {
+    font-size: 24px;
 }
 
-.conteudo{
+.conteudo {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.conteudo p{
+.conteudo p {
     margin: 0;
     font-size: 16px;
 }
-.conteudo strong{
+.conteudo strong {
     font-size: 20px;
 }
 
-.card_total{
-    background-color: #FDF3E2;
+.card_total {
+    background-color: #fdf3e2;
 }
-.card_total .icone{
+.card_total .icone {
     background-color: #673c2eb0;
 }
 
-.card_baixo{
-    background-color: #FFFDED;
+.card_baixo {
+    background-color: #fffded;
 }
-.card_baixo .icone{
+.card_baixo .icone {
     background-color: #fbef0f76;
 }
 
-.card_vazio{
-    background-color: #FFF2F2;
+.card_vazio {
+    background-color: #fff2f2;
 }
-.card_vazio .icone{
+.card_vazio .icone {
     background-color: #ff00008d;
 }
 
-
-.cards_medicamento{
+.cards_medicamento {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-top: 40px;
     width: 100%;
 }
-.box_m{
+.box_m {
     height: 150px;
     background-color: var(--cor--card-classe);
     border-radius: 10px;
@@ -138,27 +137,26 @@ main {
     align-items: center;
     gap: 10px;
 }
-.box_m p{
+.box_m p {
     margin: 0;
     font-size: 18px;
 }
-.box_m strong{
+.box_m strong {
     font-size: 16px;
 }
 
-
-.t_container{
+.t_container {
     margin-top: 40px;
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
     padding: 20px;
     border-radius: 10px;
 }
-.top_bar{
+.top_bar {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.pesquisa_insumo input{
+.pesquisa_insumo input {
     width: 250px;
     height: 35px;
     border-radius: 8px;
@@ -166,10 +164,9 @@ main {
     border: 1px solid var(--borda--geral);
     outline: none;
 }
-.top_bar button{
+.top_bar button {
     height: 35px;
     padding: 0 20px;
-    
     border-radius: 8px;
     border: none;
     background-color: var(--cor--busca);
@@ -177,50 +174,51 @@ main {
     cursor: pointer;
     transition: 0.1;
 }
-.top_bar button:hover{
+.top_bar button:hover {
     opacity: 0.9;
     color: #5405ff;
 }
 
-.container_tabela{
+.container_tabela {
     min-height: 400px;
     max-height: 600px;
     overflow-y: auto;
 }
 
-.tabela{
+.tabela {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
 }
-.t_head{
-    background-color: #E0E0E0;
+.t_head {
+    background-color: #e0e0e0;
 }
-th, td{
+th,
+td {
     padding: 12px;
     text-align: left;
     border: 1px solid var(--borda--geral);
 }
-th{
+th {
     font-weight: 600;
 }
 
-.acoes{
+.acoes {
     text-align: center;
     cursor: pointer;
     width: 20px;
     padding: 0;
 }
 
-.acoes i{
+.acoes i {
     padding: 5px;
     border-radius: 5px;
     transition: 0.2s;
 }
 
-.acoes i:hover{
+.acoes i:hover {
     background-color: #dcdcdc;
 }
 
@@ -231,9 +229,10 @@ th{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modal-conteudo {
@@ -242,14 +241,80 @@ th{
     padding: 30px;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-conteudo h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-conteudo form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-conteudo input,
+.modal-conteudo select {
+    padding: 10px;
+    border: 1px solid var(--borda--geral);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.modal-conteudo input:focus,
+.modal-conteudo select:focus {
+    outline: none;
+    border-color: #8bc34a;
+    box-shadow: 0 0 5px rgba(139, 195, 74, 0.3);
+}
+
+.modal-conteudo label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.modal-conteudo label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.modal-conteudo button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #8bc34a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-conteudo button[type="submit"]:hover {
+    background-color: #7cb342;
 }
 
 .fechar {
     position: absolute;
     right: 15px;
     top: 10px;
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
+    color: #999;
+    transition: 0.2s;
+}
+
+.fechar:hover {
+    color: #333;
 }
 
 

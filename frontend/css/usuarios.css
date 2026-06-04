@@ -6,34 +6,42 @@
     --fundo--tabela: #FFFFFF;
     --cor--busca: #F6F8FF;
 }
-main .btn-novo {
-    margin-top: 20  px;
-    gap: 10px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-main {
-    margin-left: 250px;
-    padding: 30px;
-    min-height: 100vh;
-    background-color: #F5F7FB;
+.topbar h1 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
 }
-
 
 .btn-novo-usuario {
-    height: 35px;
-    padding: 0 30px;
-    color: var(--preto);   
-    border-radius: 8px;
-    border: none;
     background-color: #8bc34a;
     color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
     font-size: 14px;
     font-weight: 600;
-    border: 1px solid var(--borda--geral);
-    cursor: pointer;
-    transition: 0.1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-novo-usuario:hover {
+    background-color: #7cb342;
 }
 
 .sidebar-container {
@@ -49,15 +57,13 @@ main {
 }
 
 
-.btn-novo:hover{
-    background-color: #7cb342;
-}
 
 .cards_usuarios{
-    display: flex;
-    justify-content: center;
-    gap: 125px;
-    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
 }
 .cards_usuarios article{
     display: flex;
@@ -101,35 +107,6 @@ main {
     text-align: center;
 }
 
-.card_total{
-    background-color: #FDF3E2;
-}
-.card_total .icone{
-    background-color: #673c2eb0;
-}
-
-.card_baixo{
-    background-color: #FFFDED;
-}
-.card_baixo .icone{
-    background-color: #fbef0f76;
-}
-
-.card_vazio{
-    background-color: #FFF2F2;
-}
-.card_vazio .icone{
-    background-color: #ff00008d;
-}
-
-
-.cards_usuarios{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-    width: 100%;
-}
 .box_u{
     height: 150px;
     background-color: var(--cor--card-classe);

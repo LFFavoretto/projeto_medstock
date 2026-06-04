@@ -1,144 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/produto.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/produto.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MedStock - dashboard</title>
 </head>
 <body>
+    <aside class="sidebar-container">
+        <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu" />
+        <nav class="sidebar">
+            <div class="menu">
+                <a id="menuDashboard" href="dashboard.html" ><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a>
+                <a id="menuUnidades" href="unidade.html"><i class="fa-solid fa-house-medical"></i><span>Unidades de saúde</span></a>
+                <a class="ativo" href="produto.html"><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a>
+                <a href="movimentacao.html"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
+                <a id="menuUsuarios" href="usuarios.html"><i class="fa-solid fa-user"></i><span>Usuários</span></a>
+            </div>
+        </nav>
+        <button class="btn-sair" onclick="logout()">Sair </button>
+        <div class="footer">© 2026 MedStock</div>
+    </aside>
+    <main>
+        <div class="topbar">
+            <h1>Produtos</h1>
+            <button class="btn-novo"><i class="fa-solid fa-plus"></i> Novo Produto</button>
+        </div>     
 
-<aside class="sidebar-container">
-    <img src="./img/logo-medicamento.png" alt="logo" class="logo_menu">
-    <nav class="sidebar">
-        <div class="menu">            
-            <a href="dashboard.html" class="ativo"><i class="fa-solid fa-chart-simple"></i><span>Dashboard</span></a>
-            <a href="unidade.html"><i class="fa-solid fa-house-medical"></i><span>Unidades de saúde</span></a>
-            <a href="produto.html"><i class="fa-solid fa-boxes-stacked"></i><span>Produtos</span></a>
-            <a href="movimentacao.html"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Movimentação</span></a>
-            <a href="usuarios.html"><i class="fa-solid fa-users"></i><span>Usuários</span></a>
+        <section class="cards_estoque">
+            <article class="card_total">
+                <div class="icone">
+                    <i class="fa-solid fa-warehouse"></i>
+                </div>
+                <div class="conteudo">
+                    <p>Estoque total</p>
+                    <strong>12.500</strong>
+                </div>
+            </article>
+
+            <article class="card_baixo">
+                <div class="icone">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="conteudo">
+                    <p>Estoque baixo</p>
+                    <strong>1.000</strong>
+                </div>
+            </article>
+
+            <article class="card_vazio">
+                <div class="icone">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="conteudo">
+                    <p>Sem estoque</p>
+                    <strong>100</strong>
+                </div>
+            </article>
+        </section>
+
+        <section class="cards_medicamento">
+            <article class="box_m">
+                <p>Classe de insumo</p>
+                <strong>134</strong>
+            </article>
+
+            <article class="box_m">
+                <p>Classe de insumo</p>
+                <strong>134</strong>
+            </article>
+
+            <article class="box_m">
+                <p>Classe de insumo</p>
+                <strong>134</strong>
+            </article>
+
+            <article class="box_m">
+                <p>Classe de insumo</p>
+                <strong>134</strong>
+            </article>
+        </section>
+        <section class="t_container">
+            <div class="top_bar">
+                <div class="pesquisa_insumo">
+                    <input type="text" placeholder="Consultar insumo" />
+                </div>
+                <button>Filtro</button>
+            </div>
+
+            <div class="container_tabela">
+                <table class="tabela">
+                    <thead class="t_head">
+                        <tr>
+                            <th>Produto</th>
+                            <th>Tipo</th>
+                            <th>Quantidade</th>
+                            <th>Situação</th>
+                            <th>Lote</th>
+                            <th>Fornecedor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-produtos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <!-- MODAL -->
+    <div id="modalProduto" class="modal">
+        <div class="modal-conteudo">
+            <span class="fechar">&times;</span>
+            <h2>Novo Produto</h2>
+            <form id="formProduto">
+                <input type="text" id="nome" placeholder="Nome do Produto" required />
+                <select id="tipo" required>
+                    <option value="">Selecione o tipo</option>
+                    <option value="insumo">Insumo</option>
+                    <option value="medicamento">Medicamento</option>
+                </select>
+                <input type="text" id="marca" placeholder="Marca" />
+                <input type="text" id="fornecedor" placeholder="Fornecedor" />
+                <!-- Campos para Medicamento -->
+                <input type="text" id="dosagem" placeholder="Dosagem (ex: 500mg)" style="display: none"/>
+                <label id="labelControlado" style="display: none"><input type="checkbox" id="controlado" /> Medicamento Controlado </label>
+                <!-- Campos para Insumo -->
+                <input type="text" id="categoria_insumo" placeholder="Categoria do Insumo" style="display: none"/>
+                <input" type="text"" id="setor"" placeholder="Setor"" style="display: none" />
+                <button type="submit">Salvar Produto</button>
+            </form>
         </div>
-    </nav>
-    <div class="footer">© 2026 MedStock</div>
-</aside>
-
-<main>
-    <button class="btn-novo">+ Novo Produto</button>
-    <section class="cards_estoque">
-        <article class="card_total">
-            <div class="icone">
-                <i class="fa-solid fa-warehouse"></i>
-            </div>
-            <div class="conteudo">
-                <p>Estoque total</p>
-                <strong>12.500</strong>
-            </div>
-        </article>
-
-        <article class="card_baixo">
-            <div class="icone">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <div class="conteudo">
-                <p>Estoque baixo</p>
-                <strong>1.000</strong>
-            </div>
-        </article>
-
-        <article class="card_vazio">
-            <div class="icone">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-            <div class="conteudo">
-                <p>Sem estoque</p>
-                <strong>100</strong>
-            </div>
-        </article>
-
-    </section>
-
-    <section class="cards_medicamento">
-        <article class="box_m">
-            <p>Classe de insumo</p>
-            <strong>134</strong>
-        </article>
-
-        <article class="box_m">
-            <p>Classe de insumo</p>
-            <strong>134</strong>
-        </article>
-
-        <article class="box_m">
-            <p>Classe de insumo</p>
-            <strong>134</strong>
-        </article>
-
-        <article class="box_m">
-            <p>Classe de insumo</p>
-            <strong>134</strong>
-        </article>
-    </section>
-
-    <section class="t_container">
-
-        <div class="top_bar">
-            <div class="pesquisa_insumo">
-                <input type="text" placeholder="Consultar insumo">
-            </div>
-            <button>Filtro</button>
-        </div>
-
-        <div class="container_tabela">        
-            <table class="tabela">
-                <thead class="t_head">
-                    <tr>
-                        <th>Produto</th>
-                        <th>Tipo</th>   
-                        <th>Quantidade</th>
-                        <th>Situação</th>
-                        <th>Lote</th>
-                        <th>Fornecedor</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-produtos">
-                </tbody>
-            </table>
-        </div>
-        
-    </section>
-</main>
-<!-- MODAL -->
-<div id="modalProduto" class="modal">
-    <div class="modal-conteudo">
-        <h2>Novo Produto</h2>
-        <form id="formProduto">
-            <input
-                type="text"
-                id="nome"
-                placeholder="Nome"
-                required
-            >
-            <select id="tipo">
-                <option value="insumo">
-                    Insumo
-                </option>
-                <option value="medicamento">
-                    Medicamento
-                </option>
-            </select>
-            <input
-                type="text"
-                id="marca"
-                placeholder="Marca"
-            >
-            <button type="submit">
-                Salvar
-            </button>
-        </form>
     </div>
-</div>
-<script src="./js/produtos.js"></script>
+    <script src="./js/produtos.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

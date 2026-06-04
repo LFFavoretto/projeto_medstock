@@ -262,7 +262,7 @@ router.post('/login', async (req, res) => {
 
         res.json({ token,
             tipo: usuario.tipo_usuario,
-            nome: usuario.next
+            nome: usuario.nome
         })
 
     } catch (erro) {

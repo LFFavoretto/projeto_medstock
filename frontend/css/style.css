@@ -76,14 +76,35 @@ aside .menu a i{
     color: var(--cor--icone);
 }
 
+.menu a .ativo{
+    background-color: var(--cor--button-menu) ;
+}
+
+.btn-sair{
+    height: 30px;
+    width: 125px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    background-color: #0E2773;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.btn-sair:hover{
+    background-color: #42558C;
+}
+
 /* fim menu lateral */
 
 /* inicio do main */
 main {
-    margin-left: 220px; /* espaço definido para que o "main" não fique abaixo do "aside" */
+    margin-left: 250px; /* espaço definido para que o "main" não fique abaixo do "aside" */
     flex: 1; 
-    padding: 60px 30px;
-    background-color: #E0E0E0;
+    padding: 30px;
+    background-color: #F5F7FB;
     min-height: 100vh;
 }
 /* fim do main*/
@@ -98,7 +119,8 @@ main {
 /*footer*/
 
 /* efeitos */
-aside .menu a:hover{
+aside .menu a:hover,
+aside .menu a.ativo {
     background-color: var(--cor--button-menu);
     border: 1px solid var(--preto);
     transition: 0.2s;

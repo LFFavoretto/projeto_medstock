@@ -8,14 +8,19 @@ const itensPorPagina = 10;
 // Inicializar página
 document.addEventListener("DOMContentLoaded", function () {
 
+    const tipoUsuario = localStorage.getItem( "tipoUsuario");
+
+    if (tipoUsuario !== "administrador") {
+        window.location.href = "produto.html"
+
+}
+
 if (document.getElementById("lista-usuarios")) {
     carregarUsuarios();
     carregarUnidades();
 
     document.querySelector(".pesquisa_usuario input").addEventListener("keyup", filtrarTabelaUsuarios);
     document.getElementById("formUsuario").addEventListener("submit", salvarUsuario);
-    document.getElementById("btnNovoUsuario").addEventListener("click", abrirModalNovoUsuario);
-    document.getElementById("btnCancelar").addEventListener("click", fecharModalNovoUsuario);
 }
 
 });
@@ -177,6 +182,9 @@ async function salvarUsuario(event) {
 event.preventDefault();
 
 const token = localStorage.getItem("token");
+    if(!token){
+        window.location.href="login.html"
+    }
 
 const dados = {
     id_unidade_saude: document.getElementById("id_unidade_saude").value,

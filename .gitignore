@@ -3,6 +3,7 @@
 # =========================
 .env
 backend/.env
+backend/.gerarHash.js
 
 # =========================
 # 📦 Dependências Node
