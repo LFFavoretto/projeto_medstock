@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     // ================= ACESSO AO BANCO =================
     // Query que junta várias tabelas (JOIN)
     const [rows] =
-      await db.query(`SELECT e.id, p.nome AS produto, u.nome AS usuario, us.nome AS unidade, e.tipo_movimentacao, e.quantidade, e.data_movimentacao
+      await db.query(`SELECT e.id, p.nome AS produto, u.nome AS usuario, us.nome AS unidade, e.lote, e.tipo_movimentacao, e.quantidade, e.data_movimentacao
             FROM estoque e
             JOIN produtos p ON e.id_produtos = p.id
             JOIN usuarios u ON e.id_usuarios = u.id
@@ -133,6 +133,7 @@ router.post("/", async (req, res) => {
 
     res.send("Movimentação realizada com sucesso");
   } catch (erro) {
+    console.error("ERRO ESTOQUE:", erro);
     res.status(500).send(erro);
   }
 });

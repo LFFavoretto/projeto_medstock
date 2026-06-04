@@ -1,3 +1,4 @@
+console.log("script carregado")
 document.addEventListener("DOMContentLoaded", () => {
 
   const tipoUsuario =localStorage.getItem("tipoUsuario");
@@ -16,7 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  
 });
+
+const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "login.html";
+    }
 
 function logout() {
 

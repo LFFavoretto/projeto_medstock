@@ -9,7 +9,7 @@ class Movimentacao {
         this.data = new Date();
     }
 
-    validarTipo() {        
+    validarTipo(tipo) {
         if (!['entrada', 'saida'].includes(tipo)) {
             throw new Error('Tipo inválido');
         }

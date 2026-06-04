@@ -38,7 +38,12 @@ async function fazerLogin() {
 
         localStorage.setItem("nomeUsuario", dados.nome);
 
-        window.location.href ="dashboard.html";
+        localStorage.setItem("idUsuario", dados.id);
+
+        const token = localStorage.getItem("token");
+        if (token){
+            window.location.href ="dashboard.html";
+        }       
 
     } catch (erro) {
         console.error(erro);

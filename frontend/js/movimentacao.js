@@ -43,6 +43,43 @@ async function carregarMovimentacoes() {
     }
 }
 
+async function carregarProdutos() {
+    try {
+        const response = await fetch("http://localhost:3000/produtos");
+
+        const produtos = await response.json();
+
+        const select = document.getElementById("selectProduto");
+
+        select.innerHTML = '<option value="">Selecione um produto</option>';
+
+        produtos.forEach(produto => {
+            select.innerHTML += `<option value="${produto.id}">${produto.nome}</option>`;
+        });
+    } catch (erro) {
+        console.error("Erro ao carregar produtos",erro);
+    }
+}
+
+async function carregarUnidades() {
+    try {
+        const response = await fetch("http://localhost:3000/unidades");
+
+        const unidades = await response.json();
+
+        const select = document.getElementById("selectUnidade");
+
+        select.innerHTML = '<option value="">Selecione uma unidade</option>';
+
+        unidades.forEach(unidade => {
+            select.innerHTML += `<option value="${unidade.id}"> ${unidade.nome}</option>`;
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar unidades", erro);
+    }
+}
+
 function exibirMovimentacoes(dados) {
     const tbody = document.getElementById("corpoTabela");
 
@@ -154,7 +191,7 @@ async function salvarMovimentacao(event) {
     const dados = {
         id_unidade_saude: document.getElementById("selectUnidade").value,
         id_produtos: document.getElementById("selectProduto").value,
-        id_usuarios: 1, // Ajuste conforme necessário (usuário logado)
+        id_usuarios: Number(localStorage.getItem("idUsuario")),
         tipo_movimentacao: document.getElementById("tipoMovimentacao").value,
         quantidade: parseInt(document.getElementById("quantidade").value),
         lote: document.getElementById("lote").value || null,
@@ -162,7 +199,9 @@ async function salvarMovimentacao(event) {
         observacoes: document.getElementById("observacoes").value || null,
     };
 
+    
     try {
+        
         const response = await fetch(ESTOQUE_API, {
             method: "POST",
             headers: {
@@ -170,7 +209,8 @@ async function salvarMovimentacao(event) {
             },
             body: JSON.stringify(dados),
         });
-
+        
+        
     if (response.ok) {
         exibirSucesso("Movimentação registrada com sucesso!");
         fecharModalNovaMovimentacao();
@@ -181,7 +221,7 @@ async function salvarMovimentacao(event) {
     }
     } catch (erro) {
         console.error("Erro:", erro);
-        exibirErro("Erro ao conectar com o servidor");
+        exibirErro(erro.message);
     }
 }
 
