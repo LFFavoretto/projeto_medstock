@@ -12,8 +12,27 @@ router.get('/', async (req, res) => {
     try{        
         // ================= ACESSO AO BANCO =================
         // Busca todos os produtos cadastrados
-        const[rows] = await db.query('SELECT * FROM produtos WHERE ativo = TRUE');
-
+        const [rows] = await db.query(`
+            SELECT
+                p.*,
+                COALESCE(
+                    SUM(
+                        CASE
+                            WHEN e.tipo_movimentacao = 'entrada'
+                            THEN e.quantidade
+                            WHEN e.tipo_movimentacao = 'saida'
+                            THEN -e.quantidade
+                            ELSE 0
+                        END
+                    ),
+                    0
+                ) AS quantidade
+                    FROM produtos p
+                    LEFT JOIN estoque e
+                        ON p.id = e.id_produtos
+                    WHERE p.ativo = TRUE
+                    GROUP BY p.id
+            `);
         res.json(rows);
     }
 

@@ -1,8 +1,10 @@
+const API_URL = "http://localhost:3000";
 const UNIDADES_API = `${API_URL}/unidades`;
 
 let unidades = [];
 let paginaAtualUnidades = 1;
 let unidadeEmEdicao = null;
+const itensPorPagina = 10;
 
 // Inicializar página de unidades
 document.addEventListener("DOMContentLoaded", function () {

@@ -117,6 +117,8 @@ async function listarProdutos() {
 
         const produtos = await resposta.json();
 
+        atualizarCards(produtos);
+
         const tbody = document.getElementById("lista-produtos");
 
         tbody.innerHTML = "";
@@ -126,11 +128,10 @@ async function listarProdutos() {
                     <tr>
                         <td>${produto.nome}</td>
                         <td>${produto.tipo}</td>
-                        <td>-</td>
+                        <td>${produto.marca ?? "-"}</td>
                         <td>${produto.ativo ? "Ativo" : "Inativo"}</td>
-                        <td>-</td>
-                        <td>${produto.fornecedor ?? "-"}</td>
-
+                        <td>${produto.quantidade}</td>
+                        <td>${produto.dosagem ?? produto.categoria_insumo ?? "-"}</td>
                         <td class="acoes">
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </td>
@@ -157,6 +158,47 @@ async function carregarProdutos() {
     } catch (erro) {
         console.error("Erro ao carregar produtos:", erro);
     }
+}
+
+function atualizarCards(produtos) {
+
+    console.table(produtos.map(p => ({
+        nome: p.nome,
+        quantidade: p.quantidade,
+        numero: Number(p.quantidade)
+    }))
+);
+
+    const estoqueTotal = produtos.reduce((total, produto) => total + Number(produto.quantidade), 0);
+
+    const estoqueBaixo = produtos.filter(produto => produto.quantidade > 0 && produto.quantidade < 200).length;
+
+    const semEstoque = produtos.filter(produto => Number(produto.quantidade) === 0).length;
+    console.log("Sem estoque:", semEstoque);
+
+    const medicamento = produtos.filter( produto => produto.tipo === "medicamento" && !produto.controlado).length;
+
+    const controlado = produtos.filter(produto => produto.tipo === "medicamento" && produto.controlado).length;
+
+    const insumo = produtos.filter(produto => produto.tipo === "insumo").length;
+
+    const ativos = produtos.filter(p => p.ativo).length;
+
+    document.getElementById("estoqueTotal").textContent = estoqueTotal;
+
+    document.getElementById("estoqueBaixo").textContent = estoqueBaixo;
+
+    document.getElementById("semEstoque").textContent = semEstoque;
+
+    document.getElementById("medicamento").textContent = medicamento;
+
+    document.getElementById("controlado").textContent = controlado;
+
+    document.getElementById("insumo").textContent = insumo;
+
+    document.getElementById("ativo").textContent = ativos;
+
+    console.log(produtos);
 }
 
 listarProdutos();

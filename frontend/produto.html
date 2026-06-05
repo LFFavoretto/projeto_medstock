@@ -39,17 +39,17 @@
                 </div>
                 <div class="conteudo">
                     <p>Estoque total</p>
-                    <strong>12.500</strong>
+                    <strong id="estoqueTotal">0</strong>
                 </div>
             </article>
 
             <article class="card_baixo">
                 <div class="icone">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>    
                 </div>
                 <div class="conteudo">
                     <p>Estoque baixo</p>
-                    <strong>1.000</strong>
+                    <strong id="estoqueBaixo">0</strong>
                 </div>
             </article>
 
@@ -59,30 +59,30 @@
                 </div>
                 <div class="conteudo">
                     <p>Sem estoque</p>
-                    <strong>100</strong>
+                    <strong id="semEstoque">0</strong>
                 </div>
             </article>
         </section>
 
         <section class="cards_medicamento">
             <article class="box_m">
-                <p>Classe de insumo</p>
-                <strong>134</strong>
+                <p>Medicamentos Comuns</p>
+                <strong id="medicamento">0</strong>
+            </article>
+
+            <article class="box_m">
+                <p>Medicamentos Controlados</p>
+                <strong id="controlado">0</strong>
             </article>
 
             <article class="box_m">
                 <p>Insumos</p>
-                <strong id="totalInsumos">0</strong>
+                <strong id="insumo">0</strong>
             </article>
 
             <article class="box_m">
-                <p>Classe de insumo</p>
-                <strong>134</strong>
-            </article>
-
-            <article class="box_m">
-                <p>Classe de insumo</p>
-                <strong>134</strong>
+                <p>Produtos ativos</p>
+                <strong id="ativo">0</strong>
             </article>
         </section>
         <section class="t_container">
@@ -99,10 +99,10 @@
                         <tr>
                             <th>Produto</th>
                             <th>Tipo</th>
-                            <th>Quantidade</th>
+                            <th>Marca</th>
                             <th>Situação</th>
-                            <th>Lote</th>
-                            <th>Fornecedor</th>
+                            <th>Quantidade</th>
+                            <th>Especificação</th>
                         </tr>
                     </thead>
                     <tbody id="lista-produtos"></tbody>
@@ -129,7 +129,7 @@
                 <label id="labelControlado" style="display: none"><input type="checkbox" id="controlado" /> Medicamento Controlado </label>
                 <!-- Campos para Insumo -->
                 <input type="text" id="categoria_insumo" placeholder="Categoria do Insumo" style="display: none"/>
-                <input" type="text"" id="setor"" placeholder="Setor"" style="display: none" />
+                <input type="text" id="setor" placeholder="Setor" style="display: none" />
                 <button type="submit">Salvar Produto</button>
             </form>
         </div>

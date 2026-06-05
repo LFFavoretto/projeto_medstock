@@ -98,25 +98,8 @@
     font-size: 20px;
 }
 
-.card_total {
-    background-color: #fdf3e2;
-}
-.card_total .icone {
-    background-color: #673c2eb0;
-}
-
-.card_baixo {
-    background-color: #fffded;
-}
-.card_baixo .icone {
-    background-color: #fbef0f76;
-}
-
-.card_vazio {
-    background-color: #fff2f2;
-}
-.card_vazio .icone {
-    background-color: #ff00008d;
+.card_topo {
+    background-color: #F2F2F2;
 }
 
 .cards_medicamento {

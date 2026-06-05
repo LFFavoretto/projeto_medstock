@@ -26,6 +26,20 @@ router.post('/', async (req, res) => {
             return res.status(400).send('Preencha todos os campos');
         }
 
+        // Verificação se a unidade já existe ou não
+        const [existente] = await db.query(
+            `SELECT id
+                FROM unidade_saude
+                WHERE nome = ?`,
+            [nome]
+            );
+
+            if (existente.length > 0) {
+                return res
+                    .status(400)
+                    .send("Já existe uma unidade com esse nome");
+            }
+
         // ================= BANCO =================
         // Insere nova unidade de saúde
         await db.query(
