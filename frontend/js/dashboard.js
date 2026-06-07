@@ -74,16 +74,25 @@ async function atualizarDashboardInfo() {
         const produtos = await produtosRes.json();
         const estoque = await estoqueRes.json();
         const fornecedores = new Set(produtos.map(p => p.fornecedor));
+        const estoqueBaixo = produtos.filter(p => Number(p.quantidade) > 0 && Number(p.quantidade) < 100);
 
         const statUnidades = document.getElementById("statUnidades");
         const statProdutos = document.getElementById("statProdutos");
         const statPedidos = document.getElementById("statPedidos");
         const statFornecedores = document.getElementById("statFornecedores")
+        const listaBaixoEstoque = document.getElementById("listaBaixoEstoque")
 
         if (statUnidades) statUnidades.textContent = unidades.length;
         if (statProdutos) statProdutos.textContent = produtos.length;
         if (statPedidos) statPedidos.textContent = estoque.length;
         if (statFornecedores) statFornecedores.textContent = fornecedores.size;
+        if (listaBaixoEstoque) {
+            listaBaixoEstoque.innerHTML = "";
+
+            estoqueBaixo.slice(0,5).forEach(produto => {
+                listaBaixoEstoque.innerHTML += `<li>${produto.nome}</li>`;
+            });
+        }
 
     } catch (erro) {
         console.error(

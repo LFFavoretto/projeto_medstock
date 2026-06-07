@@ -106,22 +106,12 @@ function exibirMovimentacoes(dados) {
                 <td>${mov.quantidade}</td>
                 <td>
                     <span class="badge-${mov.tipo_movimentacao}">
-                        ${mov.tipo_movimentacao === "entrada" ? "📥 Entrada" : "📤 Saída"}
+                        ${mov.tipo_movimentacao === "entrada" ? '<i class="fa-solid fa-arrow-up" style="color: rgb(40, 176, 19);"></i> Entrada' : '<i class="fa-solid fa-arrow-down" style="color: rgb(197, 22, 40);"></i> Saída'}
                     </span>
                 </td>
                 <td>${mov.unidade || "N/A"}</td>
                 <td>${mov.usuario || "N/A"}</td>
                 <td>${formatarData(mov.data_movimentacao)}</td>
-                <td>
-                    <div class="acoes">
-                        <button class="btn-acao editar" title="Editar">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button class="btn-acao deletar" title="Deletar" onclick="deletarMovimentacao(${mov.id})">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
             </tr>
         `,
         )
@@ -225,24 +215,6 @@ async function salvarMovimentacao(event) {
     }
 }
 
-async function deletarMovimentacao(id) {
-    if (confirm("Deseja realmente deletar esta movimentação?")) {
-        try {
-            const response = await fetch(`${ESTOQUE_API}/${id}`, {
-                method: "DELETE",
-            });
-            if (response.ok) {
-                exibirSucesso("Movimentação deletada com sucesso!");
-                carregarMovimentacoes();
-            } else {
-                exibirErro("Erro ao deletar movimentação");
-            }
-        }   catch (erro) {
-            console.error("Erro:", erro);
-            exibirErro("Erro ao conectar com o servidor");
-        }
-    }
-}
 // Fechar modal ao clicar fora dele
 window.addEventListener("click", function (event) {
     const modal = document.getElementById("modalNovaMovimentacao");

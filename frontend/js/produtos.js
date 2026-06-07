@@ -4,6 +4,7 @@ const btnNovo = document.querySelector(".btn-novo");
 const fecharBtn = document.querySelector(".fechar");
 const formProduto = document.getElementById("formProduto");
 const tipoProduto = document.getElementById("tipo");
+let produtoEmEdicao = null;
 
 // Abrir modal
 btnNovo.addEventListener("click", () => {
@@ -79,8 +80,12 @@ formProduto.addEventListener("submit", async (event) => {
     }
 
     try {
-        const resposta = await fetch("http://localhost:3000/produtos", {
-            method: "POST",
+        const url = produtoEmEdicao ? `http://localhost:3000/produtos/${produtoEmEdicao}` : "http://localhost:3000/produtos";
+
+        const metodo = produtoEmEdicao ? "PUT" : "POST"
+
+        const resposta = await fetch(url, {
+            method: metodo,
             headers: {
                 "Content-Type": "application/json",
             },
@@ -99,6 +104,7 @@ formProduto.addEventListener("submit", async (event) => {
     if (resposta.ok) {
         alert("Produto cadastrado com sucesso!");
         modal.style.display = "none";
+        produtoEmEdicao = null;
         listarProdutos();
     } else {
         const erro = await resposta.text();
@@ -132,8 +138,20 @@ async function listarProdutos() {
                         <td>${produto.ativo ? "Ativo" : "Inativo"}</td>
                         <td>${produto.quantidade}</td>
                         <td>${produto.dosagem ?? produto.categoria_insumo ?? "-"}</td>
-                        <td class="acoes">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <td>
+                            <div class="acoes">
+                                <button class="btn-acao editar" title="Editar" onclick="editarProduto(
+                                    ${produto.id},
+                                    '${produto.nome}',
+                                    '${produto.tipo}',
+                                    '${produto.marca ?? ""}',
+                                    '${produto.fornecedor ?? ""}',
+                                    '${produto.dosagem ?? ""}',
+                                    '${produto.categoria_insumo ?? ""}',
+                                    '${produto.setor ?? ""}',
+                                    '${produto.controlado}')"><i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn-acao deletar" title="Excluir" onclick="deletarProduto(${produto.id})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -199,6 +217,47 @@ function atualizarCards(produtos) {
     document.getElementById("ativo").textContent = ativos;
 
     console.log(produtos);
+}
+
+function editarProduto (id, nome, tipo, marca, fornecedor, dosagem, categoria_insumo, setor, controlado) {
+    produtoEmEdicao = id;
+    modal.style.display = "flex";
+
+    document.getElementById("nome").value = nome;
+    document.getElementById("tipo").value = tipo;
+    document.getElementById("marca").value = marca;
+    document.getElementById("fornecedor").value = fornecedor;
+    document.getElementById("dosagem").value = dosagem;
+    document.getElementById("categoria_insumo").value = categoria_insumo;
+    document.getElementById("setor").value = setor;
+    document.getElementById("controlado").checked = controlado;
+
+    tipoProduto.dispatchEvent(
+        new Event("change")
+    );
+}
+
+async function deletarProduto(id) {
+    if (!confirm("Deseja excluir este produto?")){
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/produtos/${id}`,{
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            alert("Produto removido com sucesso");
+            listarProdutos();
+        }
+        else {
+            const erro = await response.text();
+            alert(erro);
+        }
+    } catch (erro){
+        console.error(erro)
+    }
 }
 
 listarProdutos();

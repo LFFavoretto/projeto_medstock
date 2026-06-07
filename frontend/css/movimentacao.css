@@ -139,38 +139,6 @@
   font-size: 12px;
 }
 
-/* ===== AÇÕES ===== */
-.acoes {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-acao {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.btn-acao.editar {
-  color: #2196f3;
-}
-
-.btn-acao.editar:hover {
-  background-color: #e3f2fd;
-}
-
-.btn-acao.deletar {
-  color: #f44336;
-}
-
-.btn-acao.deletar:hover {
-  background-color: #ffebee;
-}
-
 /* ===== ESTADO VAZIO ===== */
 .linha-carregamento td,
 .linha-vazia td {

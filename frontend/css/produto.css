@@ -189,20 +189,34 @@ th {
 }
 
 .acoes {
-    text-align: center;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-acao {
+    background: none;
+    border: none;
     cursor: pointer;
-    width: 20px;
-    padding: 0;
+    font-size: 14px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
-.acoes i {
-    padding: 5px;
-    border-radius: 5px;
-    transition: 0.2s;
+.btn-acao.editar {
+    color: #2196f3;
 }
 
-.acoes i:hover {
-    background-color: #dcdcdc;
+.btn-acao.editar:hover {
+    background-color: #e3f2fd;
+}
+
+.btn-acao.deletar {
+    color: #f44336;
+}
+
+.btn-acao.deletar:hover {
+    background-color: #ffebee;
 }
 
 .modal {

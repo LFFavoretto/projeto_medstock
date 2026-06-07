@@ -4,6 +4,7 @@ const USUARIOS_API = `${API_URL}/usuarios`;
 let usuarios = [];
 let paginaAtualUsuarios = 1;
 const itensPorPagina = 10;
+let usuarioEmEdicao = null
 
 // Inicializar página
 document.addEventListener("DOMContentLoaded", function () {
@@ -62,6 +63,8 @@ try {
 // ======================
 
 function exibirUsuarios(dados) {
+dados = dados.filter(usuario => usuario.ativo);
+
 const tbody = document.getElementById("lista-usuarios");
 
 if (!dados || dados.length === 0) {
@@ -91,7 +94,15 @@ tbody.innerHTML =
                 <td>${usuario.tipo_usuario}</td>
                 <td>${usuario.unidade}</td>
                 <td>${usuario.ativo ? "Ativo" : "Inativo"}</td>
-                <td class="acoes"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                <td class="col-acoes">
+                    <div class="acoes">
+                        <button class="btn-acao editar" title="Editar" onclick="editarUsuario(${usuario.id}, '${usuario.nome}', '${usuario.email}', '${usuario.tipo_usuario}', '${usuario.unidade}')">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                        <button class="btn-acao deletar" title="Deletar" onclick="deletarUsuario(${usuario.id})">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div></td>
             </tr>`
         ).join("");
 }
@@ -101,11 +112,13 @@ tbody.innerHTML =
 // ======================
 
 function atualizarCards() {
-const total = usuarios.length;
+const usuariosAtivos = usuarios.filter(u => u.ativo);
 
-const admins =usuarios.filter(u => u.tipo_usuario === "administrador").length;
+const total = usuariosAtivos.length;
 
-const operadores =usuarios.filter(u => u.tipo_usuario === "operador").length;
+const admins =usuariosAtivos.filter(u => u.tipo_usuario === "administrador").length;
+
+const operadores =usuariosAtivos.filter(u => u.tipo_usuario === "operador").length;
 
 document.querySelectorAll(".card_usuario strong")[0].textContent = total;
 
@@ -115,7 +128,7 @@ document.querySelectorAll(".card_usuario strong")[2].textContent = operadores;
 }
 
 // ======================
-// FILTRO
+// BUSCAR
 // ======================
 
 function filtrarTabelaUsuarios() {
@@ -195,8 +208,11 @@ const dados = {
 };
 
 try {
-    const response = await fetch(USUARIOS_API,{
-                method: "POST",
+    const url = usuarioEmEdicao ? `${USUARIOS_API}/${usuarioEmEdicao}`: USUARIOS_API;
+
+    const metodo = usuarioEmEdicao ? "PUT" : "POST";
+    const response = await fetch(url,{
+                method: metodo,
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
@@ -205,6 +221,7 @@ try {
             }
         );
     if (response.ok) {
+        usuarioEmEdicao = null
         fecharModalNovoUsuario();
         carregarUsuarios();
 
@@ -242,3 +259,49 @@ function (event) {
     }
 }
 );
+
+function editarUsuario(id, nome, email, tipo_usuario, unidade){
+    usuarioEmEdicao = id;
+
+    document.getElementById("nome").value = nome;
+    document.getElementById("email").value = email;
+    document.getElementById("tipo_usuario").value = tipo_usuario;
+    const select = document.getElementById("id_unidade_saude");
+    for (let option of select.options){
+        if (option.text.trim() === unidade.trim()){
+            select.value = option.value;
+            break;
+        }
+    }
+    abrirModalNovoUsuario();
+}
+
+async function deletarUsuario(id) {
+    if (!confirm("Deseja desativar este usuário?")) {
+        return
+    }
+
+    const token = localStorage.getItem("token")
+
+    try {
+        const response = await fetch(`${USUARIOS_API}/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        if (response.ok) {
+            carregarUsuarios();
+        } else {
+            const erro = await response.text();
+
+            alert(erro);
+        }
+    } catch (erro) {
+        console.error(erro);
+        alert("Erro ao desativar usuário.")
+    }
+}
