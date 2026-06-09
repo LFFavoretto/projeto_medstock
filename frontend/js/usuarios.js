@@ -120,11 +120,15 @@ const admins =usuariosAtivos.filter(u => u.tipo_usuario === "administrador").len
 
 const operadores =usuariosAtivos.filter(u => u.tipo_usuario === "operador").length;
 
+const inativos = usuarios.filter(u => !u.ativo).length;
+
 document.querySelectorAll(".card_usuario strong")[0].textContent = total;
 
 document.querySelectorAll(".card_usuario strong")[1].textContent = admins;
 
 document.querySelectorAll(".card_usuario strong")[2].textContent = operadores;
+
+document.querySelectorAll(".card_usuario strong")[3].textContent = inativos;
 }
 
 // ======================

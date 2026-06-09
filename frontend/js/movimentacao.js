@@ -4,6 +4,7 @@ const ESTOQUE_API = `${API_URL}/estoque`;
 
 // Variáveis globais
 let movimentacoes = [];
+let movimentacoesFiltradas = [];
 let paginaAtual = 1;
 const itensPorPagina = 10;
 
@@ -36,7 +37,9 @@ async function carregarMovimentacoes() {
             throw new Error("Erro ao carregar movimentações");}
 
         movimentacoes = await response.json();
-        exibirMovimentacoes(movimentacoes);
+        
+        movimentacoesFiltradas = movimentacoes;
+        exibirMovimentacoes(movimentacoesFiltradas);
     } catch (erro) {
     console.error("Erro:", erro);
     exibirErro("Erro ao carregar movimentações");
@@ -81,6 +84,7 @@ async function carregarUnidades() {
 }
 
 function exibirMovimentacoes(dados) {
+    console.log("Recebi para exibir:", dados.length);
     const tbody = document.getElementById("corpoTabela");
 
     if (!dados || dados.length === 0) {
@@ -143,27 +147,29 @@ function exibirPaginacao(totalPaginas) {
 
 function irParaPagina(numero) {
     paginaAtual = numero;
-    exibirMovimentacoes(movimentacoes);
+    exibirMovimentacoes(movimentacoesFiltradas);
     window.scrollTo(0, 0);
 }
 
 function filtrarTabela() {
+    console.log("Filtro executado");
     const busca = document.getElementById("filtroTabela").value.toLowerCase();
     const tipo = document.getElementById("filtroTipo").value;
 
-    let filtrados = movimentacoes.filter((mov) => {
+    movimentacoesFiltradas = movimentacoes.filter((mov) => {
         const atendeBusca =
             !busca ||
             mov.produto?.toLowerCase().includes(busca) ||
             mov.usuario?.toLowerCase().includes(busca) ||
             mov.unidade?.toLowerCase().includes(busca);
         
-        const atendeTipo = !tipo || mov.tipo_movimentacao === tipo;
+            console.log("mov:",mov.tipo_movimentacao,"| tipo:",tipo,"| iguais?",mov.tipo_movimentacao === tipo);
+        const atendeTipo =  !tipo || mov.tipo_movimentacao?.trim().toLowerCase() === tipo.trim().toLowerCase();
         
         return atendeBusca && atendeTipo;
     });
     paginaAtual = 1;
-    exibirMovimentacoes(filtrados);
+    exibirMovimentacoes(movimentacoesFiltradas);
 }
 
 function abrirModalNovaMovimentacao() {

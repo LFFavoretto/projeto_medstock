@@ -60,7 +60,7 @@
 
 .cards_usuarios{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-top: 40px;
     width: 100%;
@@ -70,7 +70,7 @@
     align-items: center;
     gap: 15px;
 
-    width: 250px;
+    width: 220px;
     height: 102px;
     border: 1px solid var(--borda--geral);
     border-radius: 10px;

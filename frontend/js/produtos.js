@@ -4,7 +4,12 @@ const btnNovo = document.querySelector(".btn-novo");
 const fecharBtn = document.querySelector(".fechar");
 const formProduto = document.getElementById("formProduto");
 const tipoProduto = document.getElementById("tipo");
+let produtos = [];
 let produtoEmEdicao = null;
+const tipoUsuario = localStorage.getItem("tipoUsuario");
+    if (tipoUsuario === "operador" && btnNovo) {
+        btnNovo.style.display = "none";
+    }
 
 // Abrir modal
 btnNovo.addEventListener("click", () => {
@@ -121,7 +126,7 @@ async function listarProdutos() {
     try {
         const resposta = await fetch("http://localhost:3000/produtos");
 
-        const produtos = await resposta.json();
+        produtos = await resposta.json();
 
         atualizarCards(produtos);
 
@@ -138,7 +143,7 @@ async function listarProdutos() {
                         <td>${produto.ativo ? "Ativo" : "Inativo"}</td>
                         <td>${produto.quantidade}</td>
                         <td>${produto.dosagem ?? produto.categoria_insumo ?? "-"}</td>
-                        <td>
+                        <td>${tipoUsuario === "administrador"? `
                             <div class="acoes">
                                 <button class="btn-acao editar" title="Editar" onclick="editarProduto(
                                     ${produto.id},
@@ -149,9 +154,10 @@ async function listarProdutos() {
                                     '${produto.dosagem ?? ""}',
                                     '${produto.categoria_insumo ?? ""}',
                                     '${produto.setor ?? ""}',
-                                    '${produto.controlado}')"><i class="fa-solid fa-pencil"></i></button>
-                                <button class="btn-acao deletar" title="Excluir" onclick="deletarProduto(${produto.id})"><i class="fa-solid fa-trash"></i></button>
-                            </div>
+                                    '${produto.controlado}'
+                                )">
+                                    <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn-acao deletar" title="Excluir" onclick="deletarProduto(${produto.id})"><i class="fa-solid fa-trash"></i></button></div>`: ""}
                         </td>
                     </tr>
                 `;
@@ -260,4 +266,48 @@ async function deletarProduto(id) {
     }
 }
 
+function filtrarProdutos() {
+    const busca = document.getElementById("filtroProduto").value.toLowerCase();
+
+    const filtrados = produtos.filter(produto => produto.nome.toLowerCase().includes(busca));
+
+    atualizarTabela(filtrados);
+}
+
+function atualizarTabela(lista) {
+    const tbody = document.getElementById("lista-produtos");
+
+    tbody.innerHTML = "";
+
+    lista.forEach(produto => {
+        tbody.innerHTML += `
+                    <tr>
+                        <td>${produto.nome}</td>
+                        <td>${produto.tipo}</td>
+                        <td>${produto.marca ?? "-"}</td>
+                        <td>${produto.ativo ? "Ativo" : "Inativo"}</td>
+                        <td>${produto.quantidade}</td>
+                        <td>${produto.dosagem ?? produto.categoria_insumo ?? "-"}</td>
+                        <td>${tipoUsuario === "administrador"? `
+                            <div class="acoes">
+                                <button class="btn-acao editar" title="Editar" onclick="editarProduto(
+                                    ${produto.id},
+                                    '${produto.nome}',
+                                    '${produto.tipo}',
+                                    '${produto.marca ?? ""}',
+                                    '${produto.fornecedor ?? ""}',
+                                    '${produto.dosagem ?? ""}',
+                                    '${produto.categoria_insumo ?? ""}',
+                                    '${produto.setor ?? ""}',
+                                    '${produto.controlado}'
+                                )">
+                                    <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn-acao deletar" title="Excluir" onclick="deletarProduto(${produto.id})"><i class="fa-solid fa-trash"></i></button></div>`: ""}
+                        </td>
+                    </tr>
+                `;
+    });
+}
+
+document.getElementById("filtroProduto").addEventListener("keyup", filtrarProdutos);
 listarProdutos();
