@@ -1,6 +1,10 @@
 # 💊 MedStoq
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?logo=express)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
-Sistema web para gerenciamento de medicamentos e insumos em unidades de saúde, desenvolvido como projeto acadêmico. O sistema permite o controle de produtos, usuários, unidades de saúde e movimentações de estoque por meio de uma API REST integrada ao banco de dados MySQL.
+Sistema web desenvolvido para gerenciamento de medicamentos e insumos em unidades de saúde, desenvolvido como projeto acadêmico. O sistema permite o controle de produtos, usuários, unidades de saúde e movimentações de estoque por meio de uma API REST integrada ao banco de dados MySQL.
 
 ---
 
@@ -50,6 +54,17 @@ A aplicação permite cadastrar produtos, controlar entradas e saídas do estoqu
 
 ---
 
+## 🏗️ Arquitetura
+
+O projeto foi estruturado em camadas para separar responsabilidades entre acesso aos dados, regras de negócio e rotas da API.
+
+- **data/** → conexão com o banco de dados
+- **models/** → modelos da aplicação
+- **routes/** → endpoints da API
+- **frontend/** → interface da aplicação
+
+---
+
 ## 📂 Estrutura do Projeto
 
 ```text
@@ -83,6 +98,12 @@ A aplicação permite cadastrar produtos, controlar entradas e saídas do estoqu
 ---
 
 ## 🚀 Como Executar
+
+## ⚙️ Pré-requisitos
+
+- Node.js
+- MySQL
+- Git
 
 ### Clone o repositório
 
@@ -136,25 +157,25 @@ npm start
 
 ### Login
 
-> ![alt text](image.png)
+> ![Tela Login](image.png)
 
 ---
 
 ### Dashboard
 
-> ![alt text](image-1.png)
+> ![Dashboard](image-1.png)
 
 ---
 
 ### Cadastro de Produtos
 
-> ![alt text](image-2.png)
+> ![Tela Cadastro Produtos](image-2.png)
 
 ---
 
 ### Cadastro de Usuários
 
-> ![alt text](image-3.png)
+> ![Tela Cadastro Usuários](image-3.png)
 
 ---
 
